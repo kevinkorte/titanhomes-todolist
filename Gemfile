@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'omniauth-asana', '~> 0.0.1'
 
+gem 'bootstrap-sass'
+gem 'asana'
+
 
 
 

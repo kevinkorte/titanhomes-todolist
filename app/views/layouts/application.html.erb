@@ -7,8 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to 'Titan Homes To-Do', root_path, class: 'navbar-brand' %>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Asana', '/auth/asana' %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<%= yield %>
+<div class="container-fluid">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
 
+  <%= yield %>
+</div>
 </body>
 </html>
