@@ -21,8 +21,16 @@ class PagesController < ApplicationController
             end
         else
             client = Asana::Client.new do |c|
-                c.authentication :oauth2, @user.refresh_token
+                c.authentication    :oauth2,
+                                    refresh_token: @user.refresh_token,
+                                    client_id: ENV['ASANA_ID'],
+                                    client_secret: ENV['ASANA_SECRET'],
+                                    redirect_uri: ENV['REDIRECT_URI']
             end
+            @user.update(   token: auth_hash.credentials.token,
+                            expires_at: auth_hash.credentials.expires_at,
+                            refresh_token: auth_hash.credentials.refresh_token,
+                        )
         end
         @workspace = client.workspaces.find_by_id(ENV['TITAN_WORKSPACE_ID'])
         @projects = client.projects.find_all(workspace: ENV['TITAN_WORKSPACE_ID'])
